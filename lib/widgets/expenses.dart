@@ -21,16 +21,11 @@ class _ExpensesState extends State<Expenses> {
     ),
     Expense(
       title: 'Shoes',
-      amount: 99.99,
+      amount: 20.99,
       date: DateTime.now(),
       category: Category.leisure,
     ),
-    Expense(
-      title: 'Tires',
-      amount: 199.99,
-      date: DateTime.now(),
-      category: Category.travel,
-    ),
+   
   ];
 
   void _openAddExpenseModal() {
@@ -94,7 +89,9 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
+          
           Chart(expenses: _registeredExpenses),
+          Text("Deslize a la izquierda para eliminar:)", style: Theme.of(context).textTheme.titleSmall),
           Expanded(child: mainContent),
           
         ],
