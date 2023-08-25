@@ -84,7 +84,7 @@ void main() {
           foregroundColor: kColorScheme.onSecondaryContainer,
         ),
       ),
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       home: const Expenses(),
     ),
   );
