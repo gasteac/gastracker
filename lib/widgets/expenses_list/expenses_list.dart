@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gastracker/models/expense.dart';
-import 'package:gastracker/widgets/expenses_list/expense_item.dart';
+import 'package:gastrack/models/expense.dart';
+import 'package:gastrack/widgets/expenses_list/expense_item.dart';
 
 class ExpensesList extends StatelessWidget {
   const ExpensesList(

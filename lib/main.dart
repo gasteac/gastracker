@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gastracker/widgets/expenses.dart';
+import 'package:gastrack/widgets/expenses.dart';
 // import 'package:flutter/services.dart';
 
 var kColorScheme =

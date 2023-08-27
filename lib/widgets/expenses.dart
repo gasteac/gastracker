@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gastracker/widgets/expenses_list/expenses_list.dart';
-import 'package:gastracker/models/expense.dart';
-import "package:gastracker/widgets/new_expense.dart";
-import 'package:gastracker/widgets/chart/chart.dart';
+import 'package:gastrack/widgets/expenses_list/expenses_list.dart';
+import 'package:gastrack/models/expense.dart';
+import "package:gastrack/widgets/new_expense.dart";
+import 'package:gastrack/widgets/chart/chart.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -168,7 +168,7 @@ class _ExpensesState extends State<Expenses> {
                   child: const Text("Agregar")))
         ],
         title: const Text(
-          'Gastracker ✨🫰',
+          'GASTRACK ✨🫰',
           style: TextStyle(fontFamily: 'Aladin', fontWeight: FontWeight.w500),
         ),
       ),
@@ -179,7 +179,7 @@ class _ExpensesState extends State<Expenses> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Deslize para eliminar.",
+                    Text("Deslize para eliminar",
                         style: Theme.of(context).textTheme.titleSmall),
                     const SizedBox(width: 10),
                     ElevatedButton(
@@ -201,7 +201,7 @@ class _ExpensesState extends State<Expenses> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Deslize para eliminar.",
+                          Text("Deslize para eliminar",
                               style: Theme.of(context).textTheme.titleSmall),
                           const SizedBox(width: 10),
                           ElevatedButton(
