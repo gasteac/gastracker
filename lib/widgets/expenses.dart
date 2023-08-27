@@ -15,25 +15,62 @@ class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [
     Expense(
       title: 'Pizza',
-      amount: 10.99,
+      amount: 3000,
       date: DateTime.now(),
-      category: Category.food,
+      category: Category.comida,
     ),
     Expense(
-      title: 'Shoes',
-      amount: 20.99,
+      title: 'Zapatillas',
+      amount: 24000,
       date: DateTime.now(),
-      category: Category.leisure,
+      category: Category.ocio,
     ),
-   
+    Expense(
+      title: 'Viaje Google',
+      amount: 25000,
+      date: DateTime.now(),
+      category: Category.viajes,
+    ),
+    Expense(
+      title: 'Gates of Olympus',
+      amount: 5000,
+      date: DateTime.now(),
+      category: Category.casino,
+    ),
+    Expense(
+      title: 'Maletin',
+      amount: 5000,
+      date: DateTime.now(),
+      category: Category.trabajo,
+    ),
+    Expense(
+      title: 'UTN',
+      amount: 14000,
+      date: DateTime.now(),
+      category: Category.transporte,
+    ),
+    Expense(
+      title: 'Fibertel',
+      amount: 20000,
+      date: DateTime.now(),
+      category: Category.hogar,
+    ),
+    Expense(
+      title: 'AyudaComunitaria',
+      amount: 50000,
+      date: DateTime.now(),
+      category: Category.otros,
+    ),
   ];
 
   void _openAddExpenseModal() {
     showModalBottomSheet(
+      useSafeArea:
+          true, //que no choque con la camara o elementos importante de dif celulares
       isScrollControlled: true,
       context: context,
       builder: (ctx) {
-        return NewExpense(OnaddExpense: _addExpense);
+        return NewExpense(onAddExpense: _addExpense);
       },
     );
   }
@@ -42,6 +79,49 @@ class _ExpensesState extends State<Expenses> {
     setState(() {
       _registeredExpenses.insert(0, expense);
     });
+  }
+
+  void _removeAllExpenses() {
+    setState(() {
+      _registeredExpenses.clear();
+    });
+  }
+
+  void deleteAll() {
+    showModalBottomSheet(
+      useSafeArea:
+          true, //que no choque con la camara o elementos importante de dif celulares
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) {
+        return SizedBox(
+          width: double.infinity,
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(0, 250, 0, 0),
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                const Text(
+                    "¿Estas seguro que deseas eliminar todos los gastos?"),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                    onPressed: () {
+                      _removeAllExpenses();
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Eliminar todos")),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Cancelar")),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void _removeExpense(Expense expense) {
@@ -66,41 +146,80 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
-    Widget mainContent = const Center(
+    final width = MediaQuery.of(context).size.width;
+
+    Widget mainContent = Center(
         child: Text(
-      "No se encontraron gastos",
-      style: TextStyle(fontSize: 20),
+      "No posees gastos :D",
+      style: Theme.of(context).textTheme.titleMedium,
     ));
     if (_registeredExpenses.isNotEmpty) {
       mainContent = ExpensesList(
           expenses: _registeredExpenses, onRemoveExpense: _removeExpense);
     }
     return Scaffold(
+      resizeToAvoidBottomInset: false, //this line.
       appBar: AppBar(
         actions: [
-          IconButton(
-              onPressed: _openAddExpenseModal,
-              icon: const Icon(
-                Icons.add_box_rounded,
-                size: 40,
-              )),
+          Container(
+              margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: ElevatedButton(
+                  onPressed: _openAddExpenseModal,
+                  child: const Text("Agregar")))
         ],
-        title: const Text('✨Agenda de Gastos✨'),
+        title: const Text(
+          'Gastracker ✨🫰',
+          style: TextStyle(fontFamily: 'Aladin', fontWeight: FontWeight.w500),
+        ),
       ),
-      body: Column(
-        children: [
-          
-          Chart(expenses: _registeredExpenses),
-          Text("Deslize a la izquierda para eliminar:)", style: Theme.of(context).textTheme.titleSmall),
-          Expanded(child: mainContent),
-          
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Deslize para eliminar.",
+                        style: Theme.of(context).textTheme.titleSmall),
+                    const SizedBox(width: 10),
+                    ElevatedButton(
+                        onPressed: deleteAll,
+                        child: const Text("Eliminar todos"))
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Expanded(child: mainContent),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(child: Chart(expenses: _registeredExpenses)),
+                Expanded(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Deslize para eliminar.",
+                              style: Theme.of(context).textTheme.titleSmall),
+                          const SizedBox(width: 10),
+                          ElevatedButton(
+                              onPressed: deleteAll,
+                              child: const Text("Eliminar todos"))
+                        ],
+                      ),
+                      Expanded(child: mainContent),
+                    ],
+                  ),
+                ),
+              ],
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: _openAddExpenseModal,
         tooltip: 'Agregar',
         child: const Icon(Icons.add),
-      ), // 
+      ), //
     );
   }
 }

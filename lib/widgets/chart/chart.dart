@@ -10,10 +10,14 @@ class Chart extends StatelessWidget {
 
   List<ExpenseBucket> get buckets {
     return [
-      ExpenseBucket.forCategory(expenses, Category.food),
-      ExpenseBucket.forCategory(expenses, Category.leisure),
-      ExpenseBucket.forCategory(expenses, Category.travel),
-      ExpenseBucket.forCategory(expenses, Category.work),
+      ExpenseBucket.forCategory(expenses, Category.comida),
+      ExpenseBucket.forCategory(expenses, Category.ocio),
+      ExpenseBucket.forCategory(expenses, Category.viajes),
+      ExpenseBucket.forCategory(expenses, Category.trabajo),
+      ExpenseBucket.forCategory(expenses, Category.casino),
+      ExpenseBucket.forCategory(expenses, Category.transporte),
+      ExpenseBucket.forCategory(expenses, Category.hogar),
+      ExpenseBucket.forCategory(expenses, Category.otros),
     ];
   }
 
@@ -34,7 +38,7 @@ class Chart extends StatelessWidget {
     final isDarkMode =
         MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 15, 16, 20),
+      margin: const EdgeInsets.fromLTRB(16, 15, 16, 15),
       padding: const EdgeInsets.symmetric(
         vertical: 16,
         horizontal: 8,
